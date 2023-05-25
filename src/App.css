@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  align-items: center;
+  gap:15px;
+  margin:50px
+}
+.select-text {
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+
+
+.card{
+  display: column;
+  justify-content: center;
+  align-items: center;
+}
+.card-content{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card-content {
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.card-text {
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateY(10px);
+}
+
+.card-content:hover .card-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+.box{
+  box-sizing: border-box;
+  box-shadow: 2px 4px 8px lightgray;
+  padding: 20px;
+  width: 340px;
+  height: 260px;
+}
+.box:hover{
+  box-sizing: border-box;
+  /* box-shadow: 2px 4px 8px lightgray; */
+  /* padding: 20px; */
+  border: 4px solid orange;
+  /* 
+  line-height: 20px; */
+border-bottom: 45px solid orange;
+}
+.card-content:hover .select-text {
+  opacity: 1;
+  color: White;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.mainContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContainer h1:hover{
+  background-color: orange;
+  border-radius: 5px;
+
+}
+
+@media (max-width: 768px) {
+  .card-text {
+    margin-bottom: 0;
+    top:-15px
   }
-  to {
-    transform: rotate(360deg);
+
+  .select-text {
+    /* position: relative;
+    top: -20px; */
+    display: none;
+  }
+  .card-text {
+    margin-bottom: 0;
+    transform: translateY(0);
   }
 }
