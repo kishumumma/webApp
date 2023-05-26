@@ -1,20 +1,66 @@
-import React from 'react'
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react'
+import { FaUser } from 'react-icons/fa';
+import { useForm, Controller } from "react-hook-form";
+import {Link , useNavigate} from "react-router-dom"
+
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const handleRegistration = (data) => console.log(data);
+  const navigate=useNavigate();
+  const [formData,setFormData]=useState({
+    name:"",
+    email:"",
+    password:"",
+    passwordConfirm:""
+  })
+  const {name,email,password,passwordConfirm} =formData;
+   const onChange=(e)=>{
+    setFormData((prev)=>({
+      ...prev,
+      [e.target.name]:e.target.value
+    }))
+
+   }
   
+   const onSUbmit=(e)=>{
+    e.preventDefault();
+    navigate("/" ,{state:{formData}})
+    console.log("formadata" , formData)
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: ""
+    });
+
+   }
     return (
-      <form onSubmit={handleSubmit(handleRegistration)}>
-        <div>
-          <label>Name</label>
-          <input type="text" name="name" {...register('name')} />
-          {errors?.name && errors.name.message}
+      <>
+     <section className='heading'>
+      <h1>
+<FaUser/> Register
+      </h1>
+      <p>Please Register Your Account</p>
+      <form onSubmit={onSUbmit}>
+        <div className='form-group'>
+        <input type='text' className='form-control' id='name' name='name' value={name} placeholder='Enter your Name' onChange={onChange}/>
         </div>
-        {/* more input fields... */}
-        <button>Submit</button>
+        <div className='form-group'>
+        <input type='text' className='form-control' id='email' name='email' value={email} placeholder='Enter your Email' onChange={onChange}/>
+        </div>
+        <div className='form-group'>
+        <input type='text' className='form-control' id='password' name='password' value={password} placeholder='Enter your Password' onChange={onChange}/>
+        </div>
+        <div className='form-group'>
+        <input type='text' className='form-control' id='name' name='passwordConfirm' value={passwordConfirm} placeholder='Confirm Password' onChange={onChange}/>
+        </div>
+         <Link to="/login" > <p style={{fontSize:"14px"}}>if You Already have Account</p> </Link>
+        <div className='form-group'>
+          <button type='submit' className='btn btn-block'>Submit</button>
+        </div>
       </form>
+     </section>
+
+      </>
     );
 }
 
